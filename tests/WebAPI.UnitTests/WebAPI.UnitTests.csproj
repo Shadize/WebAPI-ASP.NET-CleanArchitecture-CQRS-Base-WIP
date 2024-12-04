@@ -25,4 +25,8 @@
     <ProjectReference Include="..\..\src\WebAPI.Domain\WebAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\" />
+  </ItemGroup>
+
 </Project>

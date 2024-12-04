@@ -1,7 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentResults" Version="3.16.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WebAPI.Domain\WebAPI.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\FeatureName\Commands\CreateFeature\" />
+    <Folder Include="Features\FeatureName\Commands\DeleteFeature\" />
+    <Folder Include="Features\FeatureName\Commands\UpdateFeature\" />
+    <Folder Include="Features\FeatureName\DTOs\" />
+    <Folder Include="Features\FeatureName\Queries\GetFeatureById\" />
+    <Folder Include="Features\FeatureName\Queries\GetAllFeatures\" />
+    <Folder Include="Features\FeatureName\Validators\" />
   </ItemGroup>
 
   <PropertyGroup>

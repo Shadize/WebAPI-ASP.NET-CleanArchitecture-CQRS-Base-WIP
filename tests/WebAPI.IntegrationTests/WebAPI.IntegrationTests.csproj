@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\src\WebAPI.API\WebAPI.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
