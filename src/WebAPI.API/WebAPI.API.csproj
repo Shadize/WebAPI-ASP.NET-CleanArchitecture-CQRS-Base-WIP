@@ -17,11 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebAPI.Application\WebAPI.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Logs\" />
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\WebAPI.Infrastructure\WebAPI.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 
 namespace WebAPI.Infrastructure.Persistence.Configurations
 {
-    public class FeatureNameConfiguration
+    public class ExampleConfiguration
     {
     }
 }

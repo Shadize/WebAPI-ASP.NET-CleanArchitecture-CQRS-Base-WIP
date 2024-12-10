@@ -12,13 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\FeatureName\Commands\CreateFeature\" />
-    <Folder Include="Features\FeatureName\Commands\DeleteFeature\" />
-    <Folder Include="Features\FeatureName\Commands\UpdateFeature\" />
-    <Folder Include="Features\FeatureName\DTOs\" />
-    <Folder Include="Features\FeatureName\Queries\GetFeatureById\" />
-    <Folder Include="Features\FeatureName\Queries\GetAllFeatures\" />
-    <Folder Include="Features\FeatureName\Validators\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
   <PropertyGroup>
