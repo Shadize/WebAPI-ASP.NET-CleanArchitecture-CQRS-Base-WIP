@@ -7,7 +7,6 @@ namespace WebAPI.Infrastructure.Persistence
     {
         private readonly ApplicationDbContext _context;
 
-        public IExampleRepository Examples { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -15,6 +14,9 @@ namespace WebAPI.Infrastructure.Persistence
 
             Examples = new ExampleRepository(context);
         }
+
+        public IExampleRepository Examples { get; private set; }
+
 
         public async Task<int> CompleteAsync()
         {

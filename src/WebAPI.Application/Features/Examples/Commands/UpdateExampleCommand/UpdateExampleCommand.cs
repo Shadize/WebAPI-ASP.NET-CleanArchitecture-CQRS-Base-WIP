@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using FluentResults;
+using MediatR;
 
 
 namespace WebAPI.Application.Features.Examples.Commands.UpdateExampleCommand
 {
-    public record UpdateExampleCommand(Guid Id, string Name, string Description) : IRequest;
+    public record UpdateExampleCommand(Guid Id, string Name, string Description) : IRequest<Result>;
 
 }

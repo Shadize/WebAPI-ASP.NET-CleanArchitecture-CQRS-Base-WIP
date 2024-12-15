@@ -1,12 +1,10 @@
-﻿
-
+﻿using FluentResults;
 using MediatR;
-using System.Reflection.Metadata;
 using WebAPI.Domain.Interfaces;
 
 namespace WebAPI.Application.Features.Examples.Commands.UpdateExampleCommand
 {
-    public class UpdateExampleCommandHandler : IRequestHandler<UpdateExampleCommand>
+    public class UpdateExampleCommandHandler : IRequestHandler<UpdateExampleCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -15,13 +13,21 @@ namespace WebAPI.Application.Features.Examples.Commands.UpdateExampleCommand
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(UpdateExampleCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(UpdateExampleCommand request, CancellationToken cancellationToken)
         {
             var example = await _unitOfWork.Examples.GetByIdAsync(request.Id);
-            if (example == null) return;
+
+            if (example == null)
+                return Result.Fail("Exemple nul");
+
             example.Name = request.Name;
             example.Description = request.Description;
-            await _unitOfWork.CompleteAsync();
+            var result = await _unitOfWork.CompleteAsync();
+
+            if (result <= 0)
+                return Result.Fail("Pas de résultat");
+
+            return Result.Ok().WithSuccess("Example correctement modifier");
         }
     }
 }

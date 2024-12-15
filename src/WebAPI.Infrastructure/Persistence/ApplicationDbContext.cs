@@ -9,6 +9,10 @@ namespace WebAPI.Infrastructure.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Example> Examples { get; set; }
+      public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+      {
+        
+      }
+      public DbSet<Example> Examples { get; set; }
     }
 }
