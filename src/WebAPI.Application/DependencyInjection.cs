@@ -18,6 +18,7 @@ namespace WebAPI.Application
                 cfg.AddOpenBehavior(typeof(RequestResponseLoggingBehavior<,>));
                 cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
                 cfg.AddOpenBehavior(typeof(CachingBehavior<,>));
+                cfg.AddOpenBehavior(typeof(CacheInvalidationBehavior<,>));
 
             });
 

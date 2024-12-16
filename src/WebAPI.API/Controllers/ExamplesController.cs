@@ -20,9 +20,9 @@ namespace WebAPI.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetExampleById(Guid id)
+        public async Task<IActionResult> GetExampleById(Guid id, bool bypassCache = false)
         {
-            var query = new GetExampleQuery(id);
+            var query = new GetExampleQuery(id, bypassCache);
             var result = await _mediatr.Send(query);
 
             if (result.IsFailed)
@@ -33,9 +33,11 @@ namespace WebAPI.API.Controllers
 
         // to do
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(bool bypassCache = false)
         {
-            var result = await _mediatr.Send(new ListExamplesQuery());
+            var query = new ListExamplesQuery(bypassCache);
+            var result = await _mediatr.Send(query);
+
             if (result.IsFailed)
                 return BadRequest(result.Errors);
 
