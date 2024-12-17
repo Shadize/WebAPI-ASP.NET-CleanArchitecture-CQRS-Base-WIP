@@ -1,28 +1,29 @@
 ﻿using FluentResults;
 using MediatR;
-using WebAPI.Domain.Interfaces;
+using WebAPI.Application.Interfaces;
 
 namespace WebAPI.Application.Features.Examples.Commands.UpdateExampleCommand
 {
     public class UpdateExampleCommandHandler : IRequestHandler<UpdateExampleCommand, Result>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IApplicationDbContext _context;
 
-        public UpdateExampleCommandHandler(IUnitOfWork unitOfWork)
+        public UpdateExampleCommandHandler(IApplicationDbContext context)
         {
-            _unitOfWork = unitOfWork;
+            _context = context;
         }
 
         public async Task<Result> Handle(UpdateExampleCommand request, CancellationToken cancellationToken)
         {
-            var example = await _unitOfWork.Examples.GetByIdAsync(request.Id);
+            var example = await _context.Examples.FindAsync(request.Id);
 
             if (example == null)
                 return Result.Fail("Exemple nul");
 
             example.Name = request.Name;
             example.Description = request.Description;
-            var result = await _unitOfWork.CompleteAsync();
+
+            var result = await _context.SaveChangesAsync(cancellationToken);
 
             if (result <= 0)
                 return Result.Fail("Pas de résultat");

@@ -1,6 +1,4 @@
-﻿
-
-using WebAPI.Domain.Common;
+﻿using WebAPI.Domain.Common;
 
 namespace WebAPI.Domain.Entities
 {

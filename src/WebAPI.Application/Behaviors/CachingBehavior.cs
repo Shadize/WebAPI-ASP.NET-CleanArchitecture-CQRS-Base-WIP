@@ -8,6 +8,14 @@ using FluentResults;
 
 namespace WebAPI.Application.Behaviors
 {
+    /*
+ Pas sur de la propreté de l'utilisation de : 
+
+                var responseType = typeof(TResponse);
+                var value = responseType.GetProperty("Value");
+
+
+ */
     public class CachingBehavior<TRequest, TResponse>(
         ILogger<CachingBehavior<TRequest, TResponse>> logger,
         IDistributedCache cache

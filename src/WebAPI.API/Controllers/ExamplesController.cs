@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebAPI.Application.Features.Examples.Commands.CreateExampleCommand;
 using WebAPI.Application.Features.Examples.Commands.DeleteExampleCommand;
 using WebAPI.Application.Features.Examples.Commands.UpdateExampleCommand;
+using WebAPI.Application.Features.Examples.Notifications;
 using WebAPI.Application.Features.Examples.Queries.GetAllExamplesQuerry;
 using WebAPI.Application.Features.Examples.Queries.GetExampleByIdQuerry;
 
@@ -12,6 +13,8 @@ namespace WebAPI.API.Controllers
     [ApiController]
     public class ExamplesController : BaseApiController
     {
+
+        // If using Notification, use IMediator
         private readonly ISender _mediatr;
 
         public ExamplesController(ISender mediatr)
@@ -31,7 +34,6 @@ namespace WebAPI.API.Controllers
             return Ok(result.Value);
         }
 
-        // to do
         [HttpGet]
         public async Task<IActionResult> GetAll(bool bypassCache = false)
         {
@@ -52,6 +54,10 @@ namespace WebAPI.API.Controllers
 
             if (result.IsFailed)
                 return BadRequest(result.Errors);
+
+            /* If Notification
+               await MediatR.Publish(new CreateExampleNotification(result.Value));
+            */
 
             return CreatedAtAction(nameof(GetExampleById), new { id = result.Value }, result.Value);
         }

@@ -1,26 +1,25 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using FluentResults;
 using MediatR;
 using WebAPI.Application.Features.Examples.DTOs;
-using WebAPI.Domain.Interfaces;
+using WebAPI.Application.Interfaces;
 
 namespace WebAPI.Application.Features.Examples.Queries.GetExampleByIdQuerry
 {
     public class GetExampleQueryHandler : IRequestHandler<GetExampleQuery, Result<ExampleDTO>>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
 
-        public GetExampleQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetExampleQueryHandler(IApplicationDbContext context, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
+            _context = context;
             _mapper = mapper;
         }
         public async Task<Result<ExampleDTO>> Handle(GetExampleQuery request, CancellationToken cancellationToken)
         {
-            var example = await _unitOfWork.Examples.GetByIdAsync(request.Id);
+            var example = await _context.Examples.FindAsync(request.Id);
 
             if (example == null)
                 return Result.Fail("Pas d'exemple");

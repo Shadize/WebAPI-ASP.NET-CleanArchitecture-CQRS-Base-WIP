@@ -2,10 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebAPI.Domain.Interfaces;
+using WebAPI.Application.Interfaces;
 using WebAPI.Infrastructure.Extensions;
 using WebAPI.Infrastructure.Persistence;
-using WebAPI.Infrastructure.Persistence.Repositories;
 using WebAPI.Infrastructure.Settings;
 
 namespace WebAPI.Infrastructure
@@ -25,6 +24,8 @@ namespace WebAPI.Infrastructure
 
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+
             return services;
         }
 
@@ -34,10 +35,6 @@ namespace WebAPI.Infrastructure
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("WebAPI.Infrastructure"))
             );
-
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddTransient<IExampleRepository, ExampleRepository>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddDistributedMemoryCache();
 
